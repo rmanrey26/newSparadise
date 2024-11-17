@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SpaRadise</title>
+    <link rel="stylesheet" href="css/index.css"> 
+</head>
+<body>
+    <div class="logo">
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:900px;height:400px;">
+    </div>
+
+    <a href="booking.html" class="button">Book Now!</a>
+
+    <button class="get-in-touch" onclick="toggleContact()">Get in Touch</button>
+
+    <div class="contact-info" id="contact">
+        <h2>Contact Us</h2>
+        <p>Address: Door 1, 3rd Floor Joanna Grace Building, Brgy Sto.Nino, Panabo, Philippines, 8105</p>
+        <p>Email: sparadise8@gmail.com</p>
+        <p>Phone: (+63) 949 901 6646</p>
+        <p>https://www.facebook.com/beyoutiful8</p>
+    </div>
+
+    <script>
+        function toggleContact() {
+            const contactSection = document.getElementById('contact');
+            contactSection.classList.toggle('active');
+            if (contactSection.classList.contains('active')) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>

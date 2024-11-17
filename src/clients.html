@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Clients</title>
+    <link rel="stylesheet" href="css/clients.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">
+        <nav>
+            <ul>
+                <li><a href="booking_employees.html">Book for a Client</a></li>
+                <li><a href="bookinghistory_employee.html">Bookings</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="vouchers.html">Vouchers</a></li>
+                <li><a href="index_employee.html">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="client-list">
+            <h1>Client List</h1>
+
+            <div class="search-sort">
+                <input type="text" id="search-bar" oninput="searchClients()" placeholder="Search clients...">
+                <button class="sort-btn" onclick="sortClients()">↑</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Birthdate</th>
+                        <th>Email</th>
+                        <th>Contact Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="client-rows">
+                </tbody>
+            </table>
+            <button class="action-btn" onclick="addClient()">Add New Client</button>
+        </div>
+
+        <div class="client-details">
+            <h1>Edit Client</h1>
+            <form id="client-form">
+                <div class="form-group">
+                    <label for="client-firstname">First Name</label>
+                    <input type="text" id="client-firstname" name="client-firstname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-middlename">Middle Name</label>
+                    <input type="text" id="client-middlename" name="client-middlename">
+                </div>
+
+                <div class="form-group">
+                    <label for="client-lastname">Last Name</label>
+                    <input type="text" id="client-lastname" name="client-lastname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-birthdate">Birthdate</label>
+                    <input type="date" id="client-birthdate" name="client-birthdate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-email">Email</label>
+                    <input type="email" id="client-email" name="client-email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-contact">Contact Number</label>
+                    <input type="text" id="client-contact" name="client-contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-alt-contact">Alternate Contact Number</label>
+                    <input type="text" id="client-alt-contact" name="client-alt-contact">
+                </div>
+
+                <div class="actions">
+                    <button type="button" onclick="cancelEdit()" class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-submit">Save Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let clients = [
+            { id: 1, firstName: 'John', middleName: 'A', lastName: 'Doe', birthdate: '1990-01-01', email: 'john@example.com', contact: '09123456789', altContact: '09876543210' },
+            { id: 2, firstName: 'Jane', middleName: '', lastName: 'Smith', birthdate: '1985-05-15', email: 'jane@example.com', contact: '09112223334', altContact: '' }
+        ];
+
+        let sortAscending = true;
+
+        function loadClients() {
+            const clientRows = document.getElementById('client-rows');
+            clientRows.innerHTML = '';
+            clients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${client.lastName}, ${client.firstName} ${client.middleName}</td>
+            <td>${client.birthdate}</td>
+            <td>${client.email}</td>
+            <td>${client.contact}</td>
+            <td>
+                <button class="action-btn" onclick="editClient(${client.id})">Edit</button>
+                <button class="action-btn" onclick="deleteClient(${client.id})">Delete</button>
+            </td>
+        `;
+                clientRows.appendChild(row);
+            });
+        }
+
+        function searchClients() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const filteredClients = clients.filter(client =>
+                `${client.firstName} ${client.middleName} ${client.lastName}`.toLowerCase().includes(searchQuery)
+            );
+
+            displayClients(filteredClients);
+        }
+
+        function displayClients(clientsToDisplay) {
+            const clientRows = document.getElementById('client-rows');
+            clientRows.innerHTML = '';
+            clientsToDisplay.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${client.lastName}, ${client.firstName} ${client.middleName}</td>
+            <td>${client.birthdate}</td>
+            <td>${client.email}</td>
+            <td>${client.contact}</td>
+            <td>
+                <button class="action-btn" onclick="editClient(${client.id})">Edit</button>
+                <button class="action-btn" onclick="deleteClient(${client.id})">Delete</button>
+            </td>
+        `;
+                clientRows.appendChild(row);
+            });
+        }
+
+        function sortClients() {
+            const sortButton = document.querySelector('.sort-btn');
+
+            clients.sort((a, b) => {
+                const fullNameA = `${a.lastName}, ${a.firstName} ${a.middleName}`;
+                const fullNameB = `${b.lastName}, ${b.firstName} ${b.middleName}`;
+                return sortAscending ? fullNameA.localeCompare(fullNameB) : fullNameB.localeCompare(fullNameA);
+            });
+
+            // Toggle the sorting direction and button arrow
+            sortAscending = !sortAscending;
+            sortButton.textContent = sortAscending ? '↑' : '↓';
+
+            loadClients();
+        }
+
+
+        function validateClientData(client) {
+            const today = new Date();
+            const birthdate = new Date(client.birthdate);
+            const age = today.getFullYear() - birthdate.getFullYear();
+            const isUnderage = age < 12;
+            const isMinor = age >= 12 && age <= 15;
+
+            if (isUnderage) {
+                alert("Birth date invalidity: Client must be at least 12 years old.");
+                return false;
+            }
+
+            if (isMinor) {
+                alert("Client must have a parent to bring during sessions.");
+                document.getElementById('parent-input').required = true; // Assuming you have a parent input field
+            }
+
+            if (!validateEmail(client.email)) {
+                alert("Email format is invalid.");
+                return false;
+            }
+
+            if (clients.some(c => c.email === client.email && c.id !== client.id)) {
+                alert("Email is already recorded in another client.");
+                return false;
+            }
+
+            if (!validateContactNumber(client.contact)) {
+                alert("Contact number format is invalid.");
+                return false;
+            }
+
+            if (client.altContact && !validateContactNumber(client.altContact)) {
+                alert("Alternate contact number format is invalid.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validateContactNumber(contact) {
+            const contactPattern = /^\d{11}$/;
+            return contactPattern.test(contact);
+        }
+
+        function addClient() {
+            document.getElementById('client-form').reset();
+        }
+
+        function editClient(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (client) {
+                document.getElementById('client-firstname').value = client.firstName;
+                document.getElementById('client-middlename').value = client.middleName;
+                document.getElementById('client-lastname').value = client.lastName;
+                document.getElementById('client-birthdate').value = client.birthdate;
+                document.getElementById('client-email').value = client.email;
+                document.getElementById('client-contact').value = client.contact;
+                document.getElementById('client-alt-contact').value = client.altContact;
+            }
+        }
+
+        function deleteClient(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (client) {
+                const hasBookings = false;
+                if (hasBookings) {
+                    alert("Client has ongoing bookings and cannot be deleted.");
+                } else if (confirm("Are you sure you want to delete this client?")) {
+                    clients = clients.filter(c => c.id !== clientId);
+                    loadClients();
+                }
+            }
+        }
+
+        loadClients();
+    </script>
+</body>
+
+</html>

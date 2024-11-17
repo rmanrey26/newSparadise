@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('Background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: lavenderblush;
+}
+
+header div {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.booking-form-container {
+    background-color: lavenderblush;
+    padding: 40px;
+    margin: 50px auto;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.booking-form-container h2 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.booking-form-container p {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-top: -10px;
+}
+
+.booking-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.booking-form-container input[type="date"],
+.booking-form-container select,
+.booking-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.booking-form-container button.add-service-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.booking-form-container button.remove-service-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking-form-container .form-actions {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.booking-form-container .form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.booking-form-container .form-actions button.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.booking-form-container .form-actions button.submit-btn {
+    background-color: rgb(48, 25, 52);
+    color: white;
+}
+
+.booking-form-container .form-actions button.reset-btn {
+    background-color: #ccc;
+    color: #333;
+}
+

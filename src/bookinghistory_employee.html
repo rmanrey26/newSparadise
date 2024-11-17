@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+    <link rel="stylesheet" href="css/bookinghistory.css">
+</head>
+<body>
+    <div class="top-bar">
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">        <nav>
+            <nav>
+            <ul>
+                <li><a href="booking_employees.html">Book for a Client</a></li>
+                <li><a href="bookinghistory_employee.html">Bookings</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="vouchers.html">Vouchers</a></li>
+                <li><a href="index_employee.html">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="booking-list">
+            <h1>Booking History</h1>
+
+            <h2>Ongoing Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="viewBookingDetails('ongoing1')">
+                        <td>2024-09-12</td>
+                        <td>Full Body Massage</td>
+                        <td>₱1,200</td>
+                        <td>Confirmed</td>
+                    </tr>
+                    <tr onclick="viewBookingDetails('ongoing2')">
+                        <td>2024-09-16</td>
+                        <td>Facial Treatment</td>
+                        <td>₱800</td>
+                        <td>Paid</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Past Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="viewBookingDetails('past1')">
+                        <td>2024-09-01</td>
+                        <td>Hot Stone Massage</td>
+                        <td>₱1,800</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr onclick="viewBookingDetails('past2')">
+                        <td>2024-08-30</td>
+                        <td>Manicure</td>
+                        <td>₱500</td>
+                        <td>Cancelled</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="booking-details">
+            <h1>Edit Booking Details</h1>
+            <form action="submit-booking-details.html" method="POST">
+                <div class="form-group">
+                    <label for="service">Service</label>
+                    <input type="text" id="service" name="service" value="Full Body Massage" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" value="2024-09-12" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" id="price" name="price" value="₱1,200" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="confirmed" selected>Confirmed</option>
+                        <option value="paid">Paid</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function viewBookingDetails(bookingId) {
+            alert('Loading details for: ' + bookingId);
+        }
+    </script>
+</body>
+</html>

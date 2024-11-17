@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walk-In Booking</title>
+    <link rel="stylesheet" href="css/booking_employees.css">
+    <script>
+        let serviceCount = 1;
+
+        function addService() {
+            serviceCount++;
+
+            const serviceContainer = document.getElementById('service-container');
+            const newService = document.createElement('div');
+            newService.className = 'additional-service';
+
+            newService.innerHTML = `
+                <label>Additional Service / Package</label>
+                <select name="additional_service_package[]">
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="gel-manicure">Gel Manicure - ₱280</option>
+                    <option value="gel-pedicure">Gel Pedicure - ₱300</option>
+                    <option value="eyelash-extensions">Eyelash Extensions - ₱400</option>
+                    <option value="2d-lash-extensions">2D Lash Extensions - ₱500</option>
+                    <option value="3d-lash-extensions">3D Lash Extensions - ₱600</option>
+                    <option value="ua-wax">UA Wax - ₱500</option>
+                    <option value="eyebrow-threading">Eyebrow Threading - ₱200</option>
+                    <option value="footspa">Footspa - ₱120</option>
+                </select>
+                ${serviceCount > 1 ? 
+                `<button type="button" onclick="removeService(this)" class="remove-service-btn">Remove This Service</button>` 
+                : ''}
+            `;
+
+            serviceContainer.appendChild(newService);
+        }
+
+        function removeService(button) {
+            const serviceContainer = document.getElementById('service-container');
+            const serviceDiv = button.parentElement;
+            serviceContainer.removeChild(serviceDiv);
+
+            serviceCount--;
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">        <nav>
+        <nav>
+            <ul>
+                <li><a href="booking_employees.html">Book for a Client</a></li>
+                <li><a href="bookinghistory_employee.html">Bookings</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="vouchers.html">Vouchers</a></li>
+                <li><a href="index_employee.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="booking-form-container">
+        <h2>Book for a client</h2>
+        
+        <form action="submit-booking.html" method="POST">
+            <div class="form-section">
+                <h3>Booking Information</h3>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middle-name">Middle Name</label>
+                        <input type="text" id="middle-name" name="middle_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last_name" required>
+                    </div>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" id="birthdate" name="birthdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select id="sex" name="sex" required>
+                            <option value="" disabled selected>Select sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="contact-number">Contact Number</label>
+                        <input type="tel" id="contact-number" name="contact_number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Booking Details</h3>
+                <div class="form-group">
+                    <label for="booking-date">Booking Date</label>
+                    <input type="date" id="booking-date" name="booking_date" required>
+                </div>
+                
+                <div id="service-container">
+                    <label for="service-package">Service / Package</label>
+                    <select id="service-package" name="service_package" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="gel-manicure">Gel Manicure - ₱280</option>
+                        <option value="gel-pedicure">Gel Pedicure - ₱300</option>
+                        <option value="eyelash-extensions">Eyelash Extensions - ₱400</option>
+                        <option value="2d-lash-extensions">2D Lash Extensions - ₱500</option>
+                        <option value="3d-lash-extensions">3D Lash Extensions - ₱600</option>
+                        <option value="ua-wax">UA Wax - ₱500</option>
+                        <option value="eyebrow-threading">Eyebrow Threading - ₱200</option>
+                        <option value="footspa">Footspa - ₱120</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="addService()" class="add-service-btn">Add Another Service</button>
+
+                <div class="form-group">
+                    <label for="timeslot">Time</label>
+                    <select id="timeslot" name="timeslot" required>
+                        <option value="" disabled selected>Select a timeslot</option>
+                        <option value="9am">9:00 AM - 10:00 AM</option>
+                        <option value="10am">10:00 AM - 11:00 AM</option>
+                        <option value="11am">11:00 AM - 12:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Any preferences or additional information"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" onclick="window.location.href='index_employee.html'" class="back-to-home-btn">Back to Home</button>
+                <button type="submit" class="submit-btn">Create Booking</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

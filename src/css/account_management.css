@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.account-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+}
+
+.account-form-container h2 {
+    margin-bottom: 15px;
+}
+
+.account-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.account-form-container input[type="text"],
+.account-form-container input[type="email"],
+.account-form-container input[type="tel"],
+.account-form-container input[type="date"],
+.account-form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    background-color: #e0e0e0;
+}
+
+.form-actions button:nth-child(1) {
+    background-color: #4caf50;
+    color: white;
+}
+
+.form-actions button:nth-child(2) {
+    background-color: #ff9800;
+    color: white;
+}
+
+.form-actions button:nth-child(3) {
+    background-color: #2196f3;
+    color: white;
+}
+
+.form-actions button:nth-child(4) {
+    background-color: #f44336;
+    color: white;
+}

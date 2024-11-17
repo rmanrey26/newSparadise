@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Vouchers</title>
+    <link rel="stylesheet" href="css/packages.css">
+</head>
+<body>
+    <div class="top-bar">
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">
+        <nav>
+            <ul>
+                <li><a href="booking_employees.html">Book for a Client</a></li>
+                <li><a href="bookinghistory_employee.html">Bookings</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="vouchers.html">Vouchers</a></li>
+                <li><a href="index_employee.html">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Voucher List -->
+        <div class="package-list">
+            <h1>Voucher List</h1>
+
+            <!-- Search and Sort Bar -->
+            <div class="search-sort">
+                <input type="text" id="search-bar" placeholder="Search Vouchers..." onkeyup="searchVouchers()">
+                <select id="sort-bar" onchange="sortVouchers()">
+                    <option value="default">Sort By</option>
+                    <option value="name">Voucher Name</option>
+                    <option value="discount">Discount</option>
+                </select>
+                <!-- Sort Toggle Button -->
+                <button id="sort-toggle-btn" onclick="toggleSortOrder()">↑</button>
+            </div>
+
+            <table id="voucher-table">
+                <thead>
+                    <tr>
+                        <th>Voucher Name</th>
+                        <th>Discount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="viewVoucherDetails('voucher1')">
+                        <td>Relaxation Voucher</td>
+                        <td>₱500 Off</td>
+                        <td>
+                            <button class="action-btn" onclick="viewVoucherDetails('voucher1')">Edit</button>
+                        </td>
+                    </tr>
+                    <tr onclick="viewVoucherDetails('voucher2')">
+                        <td>Luxury Voucher</td>
+                        <td>₱1,000 Off</td>
+                        <td>
+                            <button class="action-btn" onclick="viewVoucherDetails('voucher2')">Edit</button>
+                        </td>
+                    </tr>
+                    <!-- More vouchers here -->
+                </tbody>
+            </table>
+            <button class="action-btn" onclick="addVoucher()">Add New Voucher</button>
+        </div>
+
+        <!-- Voucher Details -->
+        <div class="package-details">
+            <h1>Edit Voucher</h1>
+            <form action="submit-voucher.html" method="POST">
+                <div class="form-group">
+                    <label for="voucher-name">Voucher Name</label>
+                    <input type="text" id="voucher-name" name="voucher-name" value="Relaxation Voucher" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="voucher-discount">Voucher Discount</label>
+                    <input type="text" id="voucher-discount" name="voucher-discount" value="₱500 Off" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="voucher-start-date">Available From</label>
+                    <input type="date" id="voucher-start-date" name="voucher-start-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="voucher-end-date">Available Until</label>
+                    <input type="date" id="voucher-end-date" name="voucher-end-date" required>
+                </div>
+
+                <h2>Add Services or Packages</h2>
+                <div class="available-services">
+                    <ul id="available-services">
+                        <li>Swedish Massage - ₱1,000 <button type="button" class="add-service-btn" onclick="addService('Swedish Massage', '₱1,000')">Add</button></li>
+                        <li>Foot Reflexology - ₱600 <button type="button" class="add-service-btn" onclick="addService('Foot Reflexology', '₱600')">Add</button></li>
+                    </ul>
+                </div>
+
+                <h2>Services/Packages Included</h2>
+                <div class="service-list">
+                    <ul id="services-included">
+                        <li>Full Body Massage - ₱1,200 <button type="button" class="remove-service-btn">Remove</button></li>
+                        <li>Facial Treatment - ₱800 <button type="button" class="remove-service-btn">Remove</button></li>
+                    </ul>
+                </div>
+
+                <div class="actions">
+                    <button type="button" onclick="window.location.href='vouchers.html'" class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-submit">Save Voucher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let sortOrder = 'asc'; // default sort order
+
+        function viewVoucherDetails(voucherId) {
+            alert('Loading details for: ' + voucherId);
+        }
+
+        function addVoucher() {
+            alert('Adding a new voucher');
+        }
+
+        function addService(serviceName, servicePrice) {
+            const serviceList = document.getElementById('services-included');
+            const newItem = document.createElement('li');
+            newItem.innerHTML = `${serviceName} - ${servicePrice} <button type="button" class="remove-service-btn" onclick="this.parentElement.remove()">Remove</button>`;
+            serviceList.appendChild(newItem);
+        }
+
+        function searchVouchers() {
+            const input = document.getElementById('search-bar').value.toLowerCase();
+            const table = document.getElementById('voucher-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const nameCell = rows[i].getElementsByTagName('td')[0];
+                if (nameCell) {
+                    const nameText = nameCell.textContent || nameCell.innerText;
+                    rows[i].style.display = nameText.toLowerCase().includes(input) ? '' : 'none';
+                }
+            }
+        }
+
+        function sortVouchers() {
+            const table = document.getElementById('voucher-table');
+            const rows = Array.from(table.rows).slice(1);
+            const sortValue = document.getElementById('sort-bar').value;
+
+            rows.sort((a, b) => {
+                const aName = a.cells[0].innerText.toLowerCase();
+                const bName = b.cells[0].innerText.toLowerCase();
+                const aDiscount = parseFloat(a.cells[1].innerText.replace(/[^0-9.-]+/g,""));
+                const bDiscount = parseFloat(b.cells[1].innerText.replace(/[^0-9.-]+/g,""));
+
+                if (sortValue === 'name') {
+                    return sortOrder === 'asc' ? aName.localeCompare(bName) : bName.localeCompare(aName);
+                } else if (sortValue === 'discount') {
+                    return sortOrder === 'asc' ? aDiscount - bDiscount : bDiscount - aDiscount;
+                }
+                return 0;
+            });
+
+            rows.forEach(row => table.appendChild(row)); // Re-append rows to the table
+        }
+
+        function toggleSortOrder() {
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            const sortToggleBtn = document.getElementById('sort-toggle-btn');
+            sortToggleBtn.innerText = sortOrder === 'asc' ? '↑' : '↓';
+            sortVouchers(); // Re-sort after toggling the order
+        }
+    </script>
+</body>
+</html>

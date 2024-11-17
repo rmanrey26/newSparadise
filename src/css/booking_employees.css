@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: lavenderblush;
+    color: #333;
+}
+
+header div {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin-left: 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.booking-form-container {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form-container h2 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.booking-form-container .form-section {
+    margin-bottom: 30px;
+}
+
+.booking-form-container .form-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.booking-form-container .form-group-inline {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.booking-form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.booking-form-container .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.booking-form-container .form-group input[type="text"],
+.booking-form-container .form-group input[type="date"],
+.booking-form-container .form-group select,
+.booking-form-container .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.booking-form-container textarea {
+    resize: vertical;
+}
+
+.booking-form-container .additional-service {
+    margin-top: 15px;
+}
+
+.booking-form-container button.add-service-btn,
+.booking-form-container button.remove-service-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking-form-container button.remove-service-btn {
+    background-color: #ff4d4d;
+}
+
+.booking-form-container .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-form-container .form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking-form-container .form-actions button.back-to-home-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.booking-form-container .form-actions button.submit-btn {
+    background-color: #333;
+    color: #fff;
+}

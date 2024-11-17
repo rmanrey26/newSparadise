@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Management</title>
+    <link rel="stylesheet" href="css/booking.css">
+    <script>
+        function resetForm() {
+            document.getElementById('profile-form').reset();
+        }
+
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const contactNumber = document.getElementById('contact-number').value;
+            const altContactNumber = document.getElementById('alt-contact-number').value;
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const ageLimit = new Date();
+            ageLimit.setFullYear(ageLimit.getFullYear() - 18); // 18 years ago
+
+            if (birthdate > ageLimit) {
+                alert("Birth date is invalid (must be 18 or older).");
+                return false;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert("Invalid email format.");
+                return false;
+            }
+
+            if (!/^\d{11}$/.test(contactNumber)) {
+                alert("Invalid contact number format.");
+                return false;
+            }
+
+            if (altContactNumber && !/^\d{11}$/.test(altContactNumber)) {
+                alert("Invalid alternate contact number format.");
+                return false;
+            }
+
+            alert("Profile updated successfully.");
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">
+        <nav>
+            <ul>
+                <li><a href="booking.html">Schedule a Booking</a></li>
+                <li><a href="bookinghistory.html">Bookings</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="index2.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="booking-form-container">
+        <h2>Profile Management</h2>
+        <form id="profile-form" onsubmit="return validateForm()">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last_name" value="Doe" disabled>
+
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first_name" value="John" disabled>
+
+            <label for="middle-name">Middle Name</label>
+            <input type="text" id="middle-name" name="middle_name" value="A." disabled>
+
+            <label for="sex">Sex</label>
+            <select id="sex" name="sex" disabled>
+                <option value="male" selected>Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="birthdate">Birthdate</label>
+            <input type="date" id="birthdate" name="birthdate" value="2000-01-01" disabled>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="johndoe@example.com" disabled>
+
+            <label for="contact-number">Contact Number</label>
+            <input type="tel" id="contact-number" name="contact_number" value="09451234567" disabled>
+
+            <label for="alt-contact-number">Alternate Contact Number</label>
+            <input type="tel" id="alt-contact-number" name="alt_contact_number" value="">
+
+            <div class="form-actions">
+                <button type="button" onclick="resetForm()" class="cancel-btn">Reset</button>
+                <button type="submit" class="submit-btn">Update</button>
+                <button type="button" onclick="window.location.href='account.html'" class="cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

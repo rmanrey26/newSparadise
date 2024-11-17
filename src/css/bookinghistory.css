@@ -1,0 +1,135 @@
+/* General Styles */
+* {
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light grey background */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: lavenderblush; /* Light pink */
+    width: 100%; /* Full width */
+}
+
+.top-bar img {
+    max-width: 100%; /* Responsive logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.top-bar nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Container for List and Details */
+.container {
+    display: flex;
+    padding: 10px;
+    height: calc(90vh - 20px); /* Adjusted height */
+}
+
+/* Booking List Styles */
+.booking-list {
+    flex: 1;
+    background-color: white;
+    padding: 10px;
+    overflow-y: auto; /* Only vertical scrolling */
+}
+
+.booking-list h1,
+.booking-list h2 {
+    color: #333;
+}
+
+.booking-list h1 {
+    font-size: 18px;
+}
+
+.booking-list h2 {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.booking-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.booking-list table th,
+.booking-list table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.booking-list tbody tr {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.booking-list tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.booking-details {
+    flex: 2;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Only vertical scrolling */
+}
+
+.booking-details h1 {
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions .btn-submit {
+    background-color: darkviolet;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

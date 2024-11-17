@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Packages</title>
+    <link rel="stylesheet" href="css/packages.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">
+        <nav>
+            <ul>
+                <li><a href="booking_employees.html">Book for a Client</a></li>
+                <li><a href="bookinghistory_employee.html">Bookings</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="vouchers.html">Vouchers</a></li>
+                <li><a href="index_employee.html">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Package List -->
+        <div class="package-list">
+            <h1>Package List</h1>
+
+            <!-- Search and Sort Bar -->
+            <div class="search-sort">
+                <input type="text" id="search-bar" placeholder="Search Packages..." onkeyup="searchPackages()">
+                <select id="sort-bar" onchange="sortPackages()">
+                    <option value="default">Sort By</option>
+                    <option value="name">Package Name</option>
+                    <option value="price">Price</option>
+                </select>
+                <button id="sort-order-btn" onclick="toggleSortOrder()">↑</button>
+            </div>
+
+            <table id="package-table">
+                <thead>
+                    <tr>
+                        <th>Package Name</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="viewPackageDetails('package1')">
+                        <td>Relaxation Package</td>
+                        <td>₱3,000</td>
+                        <td>
+                            <button class="action-btn" onclick="viewPackageDetails('package1')">Edit</button>
+                        </td>
+                    </tr>
+                    <tr onclick="viewPackageDetails('package2')">
+                        <td>Luxury Package</td>
+                        <td>₱5,500</td>
+                        <td>
+                            <button class="action-btn" onclick="viewPackageDetails('package2')">Edit</button>
+                        </td>
+                    </tr>
+                    <!-- More packages here -->
+                </tbody>
+            </table>
+            <button class="action-btn" onclick="addPackage()">Add New Package</button>
+        </div>
+
+        <!-- Package Details -->
+        <div class="package-details">
+            <h1>Edit Package</h1>
+            <form action="submit-package.html" method="POST">
+                <div class="form-group">
+                    <label for="package-name">Package Name</label>
+                    <input type="text" id="package-name" name="package-name" value="Relaxation Package" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="package-price">Package Price</label>
+                    <input type="text" id="package-price" name="package-price" value="₱3,000" required>
+                </div>
+
+                <h2>Services Included</h2>
+                <div class="service-list">
+                    <ul id="services-included">
+                        <li>Full Body Massage - ₱1,200 <button type="button" class="remove-service-btn">Remove</button>
+                        </li>
+                        <li>Facial Treatment - ₱800 <button type="button" class="remove-service-btn">Remove</button>
+                        </li>
+                        <!-- More services here -->
+                    </ul>
+                </div>
+
+                <h2>Add Services to Package</h2>
+                <div class="available-services">
+                    <ul id="available-services">
+                        <li>Swedish Massage - ₱1,000 <button type="button" class="add-service-btn"
+                                onclick="addService('Swedish Massage', '₱1,000')">Add</button></li>
+                        <li>Foot Reflexology - ₱600 <button type="button" class="add-service-btn"
+                                onclick="addService('Foot Reflexology', '₱600')">Add</button></li>
+                        <!-- More available services here -->
+                    </ul>
+                </div>
+
+                <div class="actions">
+                    <button type="button" onclick="window.location.href='manage-packages.html'"
+                        class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-submit">Save Package</button>
+                </div>
+            </form>
+            <div class="package-maintenance">
+                <h1>Package Maintenance History</h1>
+                <table id="maintenance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Original Price</th>
+                            <th>Discount (%)</th>
+                            <th>Discounted Price</th>
+                            <th>Availabile</th>
+                            <th>Action</th> <!-- New header for the delete action -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-09-24</td>
+                            <td>₱2000</td>
+                            <td>10%</td>
+                            <td>₱1800</td>
+                            <td>Yes</td>
+                            <td>
+                                <button class="btn btn-delete" onclick="deleteMaintenanceEntry(this)">Delete</button> <!-- Delete button -->
+                            </td>
+                        </tr>                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewPackageDetails(packageId) {
+            alert('Loading details for: ' + packageId);
+            // Load package details dynamically if needed
+        }
+
+        function addPackage() {
+            alert('Adding a new package');
+            // Redirect or load new package creation page
+        }
+
+        function addService(serviceName, servicePrice) {
+            const serviceList = document.getElementById('services-included');
+            const newItem = document.createElement('li');
+            newItem.innerHTML = `${serviceName} - ${servicePrice} <button type="button" class="remove-service-btn" onclick="this.parentElement.remove()">Remove</button>`;
+            serviceList.appendChild(newItem);
+        }
+
+        let sortAscending = true;
+
+        function toggleSortOrder() {
+            const sortOrderBtn = document.getElementById('sort-order-btn');
+            sortAscending = !sortAscending;
+            sortOrderBtn.innerHTML = sortAscending ? '↑' : '↓';
+            sortPackages();
+        }
+
+        function searchPackages() {
+            const input = document.getElementById('search-bar').value.toLowerCase();
+            const table = document.getElementById('package-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const nameCell = rows[i].getElementsByTagName('td')[0];
+                if (nameCell) {
+                    const nameText = nameCell.textContent || nameCell.innerText;
+                    rows[i].style.display = nameText.toLowerCase().includes(input) ? '' : 'none';
+                }
+            }
+        }
+
+        function sortPackages() {
+            const table = document.getElementById('package-table');
+            const rows = Array.from(table.rows).slice(1);
+            const sortValue = document.getElementById('sort-bar').value;
+
+            rows.sort((a, b) => {
+                const aName = a.cells[0].innerText.toLowerCase();
+                const bName = b.cells[0].innerText.toLowerCase();
+                const aPrice = parseFloat(a.cells[1].innerText.replace(/[^0-9.-]+/g, ""));
+                const bPrice = parseFloat(b.cells[1].innerText.replace(/[^0-9.-]+/g, ""));
+
+                if (sortValue === 'name') {
+                    return sortAscending ? aName.localeCompare(bName) : bName.localeCompare(aName);
+                } else if (sortValue === 'price') {
+                    return sortAscending ? aPrice - bPrice : bPrice - aPrice;
+                }
+                return 0;
+            });
+
+            rows.forEach(row => table.appendChild(row)); // Re-append sorted rows to the table
+        }
+
+
+        function deleteMaintenanceEntry(button) {
+            const row = button.parentNode.parentNode; // Get the row of the button
+            row.parentNode.removeChild(row); // Remove the row from the table
+            alert('Maintenance entry deleted successfully.'); // Confirmation message
+        }
+
+    </script>
+</body>
+
+</html>

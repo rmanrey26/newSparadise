@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Site</title>
+    <link rel="stylesheet" href="css/booking.css">
+    <script>
+        let serviceCount = 1;
+
+        function addService() {
+            serviceCount++;
+
+            const serviceContainer = document.getElementById('service-container');
+            const newService = document.createElement('div');
+            newService.className = 'additional-service';
+
+            newService.innerHTML = `
+                <label>Additional Service / Package</label>
+                <select name="additional_service_package[]">
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="gel-manicure">Gel Manicure - ₱280</option>
+                    <option value="gel-pedicure">Gel Pedicure - ₱300</option>
+                    <option value="eyelash-extensions">Eyelash Extensions - ₱400</option>
+                    <option value="2d-lash-extensions">2D Lash Extensions - ₱500</option>
+                    <option value="3d-lash-extensions">3D Lash Extensions - ₱600</option>
+                    <option value="ua-wax">UA Wax - ₱500</option>
+                    <option value="eyebrow-threading">Eyebrow Threading - ₱200</option>
+                    <option value="footspa">Footspa - ₱120</option>
+                </select>
+                ${serviceCount > 1 ? 
+                `<button type="button" onclick="removeService(this)" class="remove-service-btn">Remove This Service</button>` 
+                : ''}
+            `;
+
+            serviceContainer.appendChild(newService);
+        }
+
+        function removeService(button) {
+            const serviceContainer = document.getElementById('service-container');
+            const serviceDiv = button.parentElement;
+            serviceContainer.removeChild(serviceDiv);
+
+            serviceCount--;
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <img src="SpaRadise Logo.png" alt="SpaRadise Logo" style="width:180px;height:70px;">        <nav>
+            <ul>
+                <li><a href="booking.html">Schedule a Booking</a></li>
+                <li><a >          </a></li>
+                <li><a href="bookinghistory.html">Bookings</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="index2.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="booking-form-container">
+        <h2>Book Now</h2>
+        <p>Booking Information</p>
+        
+        <form action="submit-booking.html" method="POST">
+            <label for="booking-date">Booking Date</label>
+            <input type="date" id="booking-date" name="booking_date" placeholder="Select a date" required>
+        
+            <div id="service-container">
+                <label for="service-package">Service / Package</label>
+                <select id="service-package" name="service_package" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="gel-manicure">Gel Manicure - ₱280</option>
+                    <option value="gel-pedicure">Gel Pedicure - ₱300</option>
+                    <option value="eyelash-extensions">Eyelash Extensions - ₱400</option>
+                    <option value="2d-lash-extensions">2D Lash Extensions - ₱500</option>
+                    <option value="3d-lash-extensions">3D Lash Extensions - ₱600</option>
+                    <option value="ua-wax">UA Wax - ₱500</option>
+                    <option value="eyebrow-threading">Eyebrow Threading - ₱200</option>
+                    <option value="footspa">Footspa - ₱120</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="addService()" class="add-service-btn">Add Another Service</button>
+
+            <label for="timeslot">Time</label>
+            <select id="timeslot" name="timeslot" required>
+                <option value="" disabled selected>Select a timeslot</option>
+                <option value="9am">9:00 AM - 10:00 AM</option>
+                <option value="10am">10:00 AM - 11:00 AM</option>
+                <option value="11am">11:00 AM - 12:00 PM</option>
+            </select>
+
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Any preferences, health conditions, or preferred worker?"></textarea>
+
+            <div class="form-actions">
+                <div class="form-actions">
+                    <div class="form-actions">
+                        <button type="button" onclick="window.location.href='index.html'" class="cancel-btn">Cancel</button>
+                        <button type="reset" class="reset-btn">Reset</button>
+                        <button type="submit" class="submit-btn">Confirm Booking</button>
+                    </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
